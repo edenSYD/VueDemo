@@ -1,31 +1,34 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-import VueResource from 'vue-resource'
 
-import Welcome from '../components/welcome'
-import TopBar from '../components/topbar'
-import snavComponent from '../components/snav-component'
-Vue.use(Router)
-Vue.use(VueResource)
-Vue.use(ElementUI)
-export default new Router({
+// 登录
+import Login from '../view/Login'
+
+let router = new Router({
   routes: [
     {
-      path: '/',
-      name: 'Welcome',
-      component: Welcome
+      path: '/login',
+      name: 'login',
+      component: Login
     },
-    {
-      path: '/topBar',
-      name: 'TopBar',
-      component: TopBar
-    },
-    {
-      path: '/navtopComponent',
-      name: 'navtopComponent',
-      component: snavComponent
-    }
   ]
 })
+//  判断是否需要登录权限 以及是否登录
+router.beforeEach((to, from, next) => {
+  // console.log(to)
+  if (to.matched.some(res => res.meta.requireAuth)) { // 判断是否需要登录权限
+    if (localStorage.getItem('userAccount')) { // 判断是否登录
+      next()
+    } else { // 没登录则跳转到登录界面
+      next({
+        path: '/login'
+        // query: {
+        //     redirect: to.fullPath
+        // } // 将跳转的路由path作为参数，登录成功后跳转到该路由
+      })
+    }
+  } else {
+    next()
+  }
+})
+export default router;
