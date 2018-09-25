@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <p>是不是有问题</p>
+    <router-view ></router-view>
   </div>
 </template>
 
 <script>
-
-export default {
+  export default {
   name: 'App'
 }
 </script>
 
-<style>
-
+<style lang="scss">
+ $background:#cccccc;
+  body{
+    background: $background;
+  }
 </style>

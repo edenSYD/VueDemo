@@ -26,7 +26,7 @@
 
 <script>
   export default {
-    name: "login",
+    name: "loginBox",
     data() {
       return {
         loginForm: {

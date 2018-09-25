@@ -3,8 +3,8 @@ import Router from 'vue-router'
 
 // 登录
 import Login from '../view/Login'
-
-let router = new Router({
+Vue.use(Router)
+export default new Router({
   routes: [
     {
       path: '/login',
@@ -31,4 +31,3 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
-export default router;
